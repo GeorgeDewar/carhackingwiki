@@ -6,6 +6,12 @@
         name: nginx
         state: present
 
+    - name: Install certbot
+      community.general.snap:
+        name: certbot
+        state: present
+        classic: true
+
     - name: Add Docker GPG apt Key
       ansible.builtin.apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
@@ -21,3 +27,12 @@
         name: docker-ce
         state: present
         update_cache: true
+
+    - name: Obtain certificates
+      ansible.builtin.command:
+        cmd: certbot certonly --nginx --keep-until-expiring -d "{{ item }}"
+      register: certbot_output
+      changed_when: "'Successfully received certificate' in certbot_output.stdout"
+      loop:
+        - carhackingwiki.com
+        - nissanleaf.carhackingwiki.com
