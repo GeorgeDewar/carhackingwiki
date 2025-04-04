@@ -1,9 +1,23 @@
 - name: My first play
   hosts: hosts
   tasks:
-    - name: Ping my hosts
-      ansible.builtin.ping:
+    - name: Install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
 
-    - name: Print message
-      ansible.builtin.debug:
-        msg: Hello world
+    - name: Add Docker GPG apt Key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      ansible.builtin.apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu noble stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      ansible.builtin.apt:
+        name: docker-ce
+        state: present
+        update_cache: true
