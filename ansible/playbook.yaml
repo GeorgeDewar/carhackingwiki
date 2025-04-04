@@ -86,6 +86,7 @@
       community.mysql.mysql_user:
         login_unix_socket: /var/run/mysqld/mysqld.sock
         name: wikiuser
+        host: "%"
         password: DA38Whg0EbbHjM
         priv: "my_wiki.*:ALL"
         state: present
@@ -95,6 +96,10 @@
         login_unix_socket: /var/run/mysqld/mysqld.sock
         name: my_wiki
         state: present
+
+    - name: Create and start MediaWiki container
+      community.docker.docker_compose_v2:
+        project_src: wiki
 
   handlers:
     - name: Restart nginx
