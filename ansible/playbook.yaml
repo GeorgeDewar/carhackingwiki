@@ -1,4 +1,4 @@
-- name: My first play
+- name: Car Hacking Wiki
   hosts: hosts
   tasks:
     - name: Install apt packages
@@ -6,9 +6,10 @@
         name:
           - nginx
           - mysql-server
+          - python3-mysqldb
         state: present
 
-    - name: Install certbot
+    - name: Install snap packages
       community.general.snap:
         name: certbot
         state: present
@@ -80,6 +81,20 @@
         line: "bind-address		= 0.0.0.0"
       notify:
         - Restart mysql
+
+    - name: Create wikiuser
+      community.mysql.mysql_user:
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+        name: wikiuser
+        password: DA38Whg0EbbHjM
+        priv: "my_wiki.*:ALL"
+        state: present
+
+    - name: Create database
+      community.mysql.mysql_db:
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+        name: my_wiki
+        state: present
 
   handlers:
     - name: Restart nginx
