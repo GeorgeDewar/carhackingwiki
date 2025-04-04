@@ -36,3 +36,25 @@
       loop:
         - carhackingwiki.com
         - nissanleaf.carhackingwiki.com
+
+    - name: Automatically renew certificates
+      ansible.builtin.cron:
+        name: "renew certificates"
+        minute: "0"
+        hour: "0"
+        job: 'certbot renew --renew-hook "systemctl reload nginx"'
+        state: present
+
+    - name: Install nginx configuration
+      ansible.builtin.copy:
+        src: ../nginx.conf
+        dest: /etc/nginx/sites-available/default
+        mode: "0644"
+      notify:
+        - Restart nginx
+
+  handlers:
+    - name: Restart nginx
+      ansible.builtin.systemd:
+        name: nginx
+        state: restarted
