@@ -1,9 +1,11 @@
 - name: My first play
   hosts: hosts
   tasks:
-    - name: Install nginx
+    - name: Install apt packages
       ansible.builtin.apt:
-        name: nginx
+        name:
+          - nginx
+          - mysql-server
         state: present
 
     - name: Install certbot
@@ -53,8 +55,39 @@
       notify:
         - Restart nginx
 
+    - name: Create directory structure
+      ansible.builtin.file:
+        path: /root/wiki/images
+        state: directory
+        mode: "0755"
+
+    - name: Copy LocalSettings.php
+      ansible.builtin.copy:
+        src: ../LocalSettings.php
+        dest: /root/wiki/LocalSettings.php
+        mode: "0644"
+
+    - name: Copy compose.yaml
+      ansible.builtin.copy:
+        src: ../compose.yaml
+        dest: /root/wiki/compose.yaml
+        mode: "0644"
+
+    - name: Configure mysql bind address
+      ansible.builtin.lineinfile:
+        path: /etc/mysql/mysql.conf.d/mysqld.cnf
+        regexp: "^bind-address"
+        line: "bind-address		= 0.0.0.0"
+      notify:
+        - Restart mysql
+
   handlers:
     - name: Restart nginx
       ansible.builtin.systemd:
         name: nginx
+        state: restarted
+
+    - name: Restart mysql
+      ansible.builtin.systemd:
+        name: mysql
         state: restarted
