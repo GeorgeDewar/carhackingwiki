@@ -1,0 +1,11 @@
+services:
+  mediawiki:
+    image: mediawiki
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - ./images:/var/www/html/images
+      - ./LocalSettings.php:/var/www/html/LocalSettings.php
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

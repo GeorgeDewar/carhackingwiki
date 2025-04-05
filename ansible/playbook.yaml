@@ -67,6 +67,8 @@
         src: ../LocalSettings.php
         dest: /root/wiki/LocalSettings.php
         mode: "0644"
+      notify:
+        - Restart MediaWiki
 
     - name: Copy compose.yaml
       ansible.builtin.copy:
@@ -110,4 +112,9 @@
     - name: Restart mysql
       ansible.builtin.systemd:
         name: mysql
+        state: restarted
+
+    - name: Restart MediaWiki
+      community.docker.docker_compose_v2:
+        project_src: wiki
         state: restarted
