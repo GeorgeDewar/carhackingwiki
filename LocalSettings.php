@@ -140,6 +140,7 @@ wfLoadSkin( 'Vector' );
 
 wfLoadExtension( 'VisualEditor' );
 wfLoadExtension( 'ReplaceText' );
+wfLoadExtension( 'Cite' );
 
 $wgUseInstantCommons = true;
 
