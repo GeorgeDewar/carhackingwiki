@@ -99,6 +99,13 @@
         name: my_wiki
         state: present
 
+    - name: Copy public web files
+      ansible.builtin.copy:
+        src: ../public/
+        dest: /root/wiki/public/
+        directory_mode: "0755"
+        mode: "0644"
+
     - name: Create and start MediaWiki container
       community.docker.docker_compose_v2:
         project_src: wiki

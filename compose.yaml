@@ -7,5 +7,6 @@ services:
     volumes:
       - ./images:/var/www/html/images
       - ./LocalSettings.php:/var/www/html/LocalSettings.php
+      - ./public/favicon.ico:/var/www/html/favicon.ico
     extra_hosts:
       - "host.docker.internal:host-gateway"
