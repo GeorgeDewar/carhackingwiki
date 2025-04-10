@@ -113,8 +113,9 @@
       community.docker.docker_image:
         name: ghcr.io/georgedewar/carhackingwiki
         source: build
+        force_source: true
         build:
-          path: ./docker
+          path: ../docker
 
     - name: Docker login
       delegate_to: localhost
@@ -138,6 +139,7 @@
     - name: Create and start MediaWiki container
       community.docker.docker_compose_v2:
         project_src: wiki
+        pull: always
 
   handlers:
     - name: Restart nginx

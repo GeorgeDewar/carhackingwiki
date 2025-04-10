@@ -141,7 +141,10 @@ wfLoadSkin( 'Vector' );
 wfLoadExtension( 'VisualEditor' );
 wfLoadExtension( 'ReplaceText' );
 wfLoadExtension( 'Cite' );
+wfLoadExtension( 'MobileFrontend' );
 
 $wgUseInstantCommons = true;
 
 $wgShowExceptionDetails = true;
+
+$wgMFAutodetectMobileView = true;
