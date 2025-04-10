@@ -1,2 +1,3 @@
 .ansible
 backup/
+ansible/secret_vars.yaml

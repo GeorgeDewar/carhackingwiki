@@ -1,6 +1,6 @@
 services:
   mediawiki:
-    image: mediawiki
+    image: ghcr.io/georgedewar/carhackingwiki
     restart: always
     ports:
       - 8080:80

@@ -1,5 +1,7 @@
 - name: Car Hacking Wiki
   hosts: hosts
+  vars_files:
+    - secret_vars.yaml
   tasks:
     - name: Install apt packages
       ansible.builtin.apt:
@@ -105,6 +107,33 @@
         dest: /root/wiki/public/
         directory_mode: "0755"
         mode: "0644"
+
+    - name: Build Docker image
+      delegate_to: localhost
+      community.docker.docker_image:
+        name: ghcr.io/georgedewar/carhackingwiki
+        source: build
+        build:
+          path: ./docker
+
+    - name: Docker login
+      delegate_to: localhost
+      community.docker.docker_login:
+        registry_url: ghcr.io
+        username: georgedewar
+        password: "{{ ghcr_pat }}"
+
+    - name: Push Docker image
+      delegate_to: localhost
+      community.docker.docker_image_push:
+        name: ghcr.io/georgedewar/carhackingwiki
+        tag: latest
+
+    - name: Docker login
+      community.docker.docker_login:
+        registry_url: ghcr.io
+        username: carhackingwiki
+        password: "{{ ghcr_pat }}"
 
     - name: Create and start MediaWiki container
       community.docker.docker_compose_v2:
