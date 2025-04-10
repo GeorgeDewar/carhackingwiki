@@ -138,13 +138,17 @@ wfLoadSkin( 'Vector' );
 # End of automatically generated settings.
 # Add more configuration options below.
 
+$wgUseInstantCommons = true;
+$wgShowExceptionDetails = true;
+
 wfLoadExtension( 'VisualEditor' );
 wfLoadExtension( 'ReplaceText' );
 wfLoadExtension( 'Cite' );
+
 wfLoadExtension( 'MobileFrontend' );
-
-$wgUseInstantCommons = true;
-
-$wgShowExceptionDetails = true;
-
 $wgMFAutodetectMobileView = true;
+
+wfLoadExtension( 'GTag' );
+$wgGTagAnalyticsId = 'G-FSMC0LBK3N';
+
+wfLoadExtension( 'AutoSitemap' );
