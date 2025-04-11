@@ -4,4 +4,4 @@
 ssh root@carhackingwiki.com "mariadb-dump -u root -p --all-databases --password=" > backup/database.sql
 
 # Back up images
-scp -r root@carhackingwiki.com:/root/wiki/images/ backup/images/
+rsync -avz --progress --delete root@carhackingwiki.com:/root/wiki/images/ backup/images/
