@@ -152,3 +152,26 @@ wfLoadExtension( 'GTag' );
 $wgGTagAnalyticsId = 'G-FSMC0LBK3N';
 
 wfLoadExtension( 'AutoSitemap' );
+
+# Add structured data to the main page for SEO
+
+function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
+    $title = $out->getTitle();
+    if ( $title->isMainPage() ) {
+        $jsonLd = <<<EOT
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Nissan Leaf Wiki",
+  "alternateName": ["Nissan Leaf - Car Hacking Wiki", "Car Hacking Wiki"],
+  "url": "https://nissanleaf.carhackingwiki.com/"
+}
+</script>
+EOT;
+        $out->addHeadItem( 'structured-data', $jsonLd );
+    }
+    return true;
+};
+
+$wgHooks['BeforePageDisplay'][] = 'onBeforePageDisplay';
