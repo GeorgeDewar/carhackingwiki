@@ -175,3 +175,5 @@ EOT;
 };
 
 $wgHooks['BeforePageDisplay'][] = 'onBeforePageDisplay';
+
+$wgFileExtensions = [ 'png', 'gif', 'jpg', 'jpeg', 'webp', 'svg' ];
