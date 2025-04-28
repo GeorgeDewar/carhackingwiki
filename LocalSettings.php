@@ -179,3 +179,5 @@ $wgHooks['BeforePageDisplay'][] = 'onBeforePageDisplay';
 $wgFileExtensions = [ 'png', 'gif', 'jpg', 'jpeg', 'webp', 'svg' ];
 
 $wgCategoryPagingLimit = 500;
+
+wfLoadExtension( 'ParserFunctions' );
