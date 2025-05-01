@@ -181,3 +181,7 @@ $wgFileExtensions = [ 'png', 'gif', 'jpg', 'jpeg', 'webp', 'svg' ];
 $wgCategoryPagingLimit = 500;
 
 wfLoadExtension( 'ParserFunctions' );
+
+# Accept the X-Forwarded-For header from Nginx
+$wgCdnServersNoPurge = [];
+$wgCdnServersNoPurge[] = "172.16.0.0/12";
