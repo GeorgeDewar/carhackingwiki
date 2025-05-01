@@ -6,4 +6,5 @@ docker run -it \
     -p 8080:80 \
     --add-host host.docker.internal:host-gateway \
     -v ./LocalSettings.php.local:/var/www/html/LocalSettings.php \
+    -v ./images:/var/www/html/images \
     ghcr.io/georgedewar/carhackingwiki

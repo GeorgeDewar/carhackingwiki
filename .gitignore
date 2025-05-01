@@ -3,3 +3,4 @@ backup/
 ansible/secret_vars.yaml
 tmp/
 LocalSettings.php.local
+images/
