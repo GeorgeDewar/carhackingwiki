@@ -1,2 +1,2 @@
 #!/bin/bash
-ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml
+ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml "$@"
