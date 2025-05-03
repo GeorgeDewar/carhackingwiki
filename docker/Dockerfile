@@ -11,3 +11,9 @@ RUN curl https://extdist.wmflabs.org/dist/extensions/MobileFrontend-REL1_43-e4f2
     && rm /tmp/*
 
 RUN git clone --depth=1 https://github.com/dolfinus/AutoSitemap /var/www/html/extensions/AutoSitemap
+
+#
+# Copy configuration
+#
+
+COPY mpm_prefork.conf /etc/apache2/mods-available/mpm_prefork.conf
