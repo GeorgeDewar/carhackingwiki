@@ -85,7 +85,7 @@ $wgUseImageMagick = true;
 $wgImageMagickConvertCommand = "/usr/bin/convert";
 
 # InstantCommons allows wiki to use images from https://commons.wikimedia.org
-$wgUseInstantCommons = false;
+$wgUseInstantCommons = true;
 
 # Periodically send a pingback to https://www.mediawiki.org/ with basic data
 # about this MediaWiki instance. The Wikimedia Foundation shares this data
@@ -138,7 +138,6 @@ wfLoadSkin( 'Vector' );
 # End of automatically generated settings.
 # Add more configuration options below.
 
-$wgUseInstantCommons = true;
 $wgShowExceptionDetails = true;
 
 wfLoadExtension( 'VisualEditor' );
@@ -182,6 +181,13 @@ $wgCategoryPagingLimit = 500;
 
 wfLoadExtension( 'ParserFunctions' );
 
+// $wgUseAjax = true;
+// wfLoadExtension( 'CategoryTree' );
+
 # Accept the X-Forwarded-For header from Nginx
 $wgCdnServersNoPurge = [];
 $wgCdnServersNoPurge[] = "172.16.0.0/12";
+
+wfLoadExtension( 'Scribunto' );
+
+$wgSVGNativeRendering = true;
