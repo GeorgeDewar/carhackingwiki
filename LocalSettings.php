@@ -191,3 +191,8 @@ $wgCdnServersNoPurge[] = "172.16.0.0/12";
 wfLoadExtension( 'Scribunto' );
 
 $wgSVGNativeRendering = true;
+
+# Disable anonymous editing
+$wgGroupPermissions['*']['edit'] = false;
+# Prevent new user registrations except by sysops
+$wgGroupPermissions['*']['createaccount'] = false;
