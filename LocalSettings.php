@@ -181,6 +181,9 @@ wfLoadExtension( 'ParserFunctions' );
 // $wgUseAjax = true;
 // wfLoadExtension( 'CategoryTree' );
 
+# CDN settings
+$wgUseCdn = true;
+
 # Accept the X-Forwarded-For header from Nginx
 $wgCdnServersNoPurge = [];
 $wgCdnServersNoPurge[] = "172.16.0.0/12";
